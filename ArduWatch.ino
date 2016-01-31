@@ -17,8 +17,9 @@ int State = 0;  // Notification #
 //--------------------------------
 
 //---Arduino input/output pins----
-int buttonPin = 6; 
+int buttonPin = 10; 
 int onboardLed = 13;
+int buzzer = 9; 
 //--------------------------------
 
 //---Clock Variables--------------
@@ -58,10 +59,11 @@ void setup()
   // register callback functions, which will be called when an associated event occurs.
   meetAndroid.registerFunction(timeValues, 'B'); 
   meetAndroid.registerFunction(phoneState, 'A');
+  pinMode(buzzer, OUTPUT);
   pinMode(onboardLed, OUTPUT);
   pinMode(buttonPin, INPUT_PULLUP);
-  digitalWrite(onboardLed, HIGH);
-  State = 10;
+  digitalWrite(onboardLed, LOW);
+  State = 0;
   strip.begin();
   strip.show();
   colorWipeBack(strip.Color(255, 0, 0), 50);
@@ -246,6 +248,7 @@ void phoneState(byte flag, byte numOfValues)
       notif8(); 
       break;
     }
+    digitalWrite(buzzer, LOW);
   }
 }
 
@@ -257,6 +260,7 @@ void call()
 void sms()
 {
   for (int i=0;i<3;i++){
+    BuzzNotif(i);
     colorWipe(strip.Color(255, 0, 0), 50);
     stopLightIncr(50);
   }
@@ -265,6 +269,7 @@ void sms()
 void gmail()
 {
   for (int i=0;i<3;i++){
+    BuzzNotif(i);
     colorWipe(strip.Color(0, 0, 255), 50);
     stopLightIncr(50);
   }
@@ -273,6 +278,7 @@ void gmail()
 void snapchat()
 {
   for (int i=0;i<3;i++){
+    BuzzNotif(i);
     colorWipe(strip.Color(255, 255, 0), 50);
     stopLightIncr(50);
   }
@@ -280,6 +286,7 @@ void snapchat()
 void notif6()
 {
   for (int i=0;i<3;i++){
+    BuzzNotif(i);
     colorWipe(strip.Color(0, 255, 255), 50);
     stopLightIncr(50);
   }
@@ -288,6 +295,7 @@ void notif6()
 void notif7()
 {
   for (int i=0;i<3;i++){
+    BuzzNotif(i);
     colorWipe(strip.Color(0, 255, 0), 50);
     stopLightIncr(50);
   }
@@ -296,6 +304,7 @@ void notif7()
 void notif8()
 {
   for (int i=0;i<3;i++){
+    BuzzNotif(i);
     colorWipe(strip.Color(255, 0, 255), 50);
     stopLightIncr(50);
   }
@@ -577,9 +586,11 @@ void Brightness(){
   }
 }
 
-
-
-
-
-
-
+void BuzzNotif(int pass){ // Turns on vibrator motor on-off-on when notification is received
+  if (pass%2 == 0){
+      digitalWrite(buzzer, HIGH);
+    }
+    else{
+      digitalWrite(buzzer, LOW);
+    }
+}
