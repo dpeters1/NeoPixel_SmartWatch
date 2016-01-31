@@ -333,6 +333,9 @@ void timeValues(byte flag, byte numOfValues)
       delay(500);
       LastMinute = Minute - 1; //Redraw clock after clearing
     }
+    if (data[0] > 12){
+      data[0] = data[0] - 12;
+    }
 
     for (int i=0; i<2;i++) //Loops 2x for h,m
     {
@@ -594,3 +597,4 @@ void BuzzNotif(int pass){ // Turns on vibrator motor on-off-on when notification
       digitalWrite(buzzer, LOW);
     }
 }
+
