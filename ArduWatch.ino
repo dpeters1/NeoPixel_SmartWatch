@@ -209,8 +209,8 @@ void buttonReleased(){
     }
   }
 
-  meetAndroid.send("Mode is");
-  meetAndroid.send(Mode);
+  //meetAndroid.send("Mode is");
+  //meetAndroid.send(Mode);
   lastButtonState = buttonState;
 }
 
@@ -556,8 +556,8 @@ void timer(){ //Whatever's in here will run every 1000ms
   }
   strip.setBrightness(Brtns);
   strip.show();
-  meetAndroid.send("Timer is");
-  meetAndroid.send(seconds);
+  //meetAndroid.send("Timer is");
+  //meetAndroid.send(seconds);
 }
 
 void Brightness(){
@@ -566,7 +566,7 @@ void Brightness(){
       brightness[i] = uv.readIR();
     }
     StblzdBrtns = (brightness[0]+brightness[1]+brightness[2]+brightness[3])/4;
-    meetAndroid.send(StblzdBrtns);
+    StblzdBrtns = abs(StblzdBrtns);
     if (StblzdBrtns < 255){
       Brtns = 10;
     }
@@ -597,4 +597,3 @@ void BuzzNotif(int pass){ // Turns on vibrator motor on-off-on when notification
       digitalWrite(buzzer, LOW);
     }
 }
-
