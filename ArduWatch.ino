@@ -579,7 +579,7 @@ void Brightness(){
     if (StblzdBrtns < 500 && StblzdBrtns > 299){
       Brtns = 115;
     }
-    if (StblzdBrtns < 5000 && StblzdBrtns > 499){
+    if (StblzdBrtns > 499){
       Brtns = 200;
     }
     if (Brtns != lastBrtns && Mode == 0){
